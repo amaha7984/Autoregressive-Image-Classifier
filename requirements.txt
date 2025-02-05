@@ -1,0 +1,7 @@
+# Core dependencies
+torch==2.5.1
+torchvision==0.20.1
+
+# Git-based dependencies from Apple AIM
+git+https://github.com/apple/ml-aim.git#subdirectory=aim-v1
+git+https://github.com/apple/ml-aim.git#subdirectory=aim-v2

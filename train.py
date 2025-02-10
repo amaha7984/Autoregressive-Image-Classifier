@@ -45,8 +45,9 @@ def train(rank, world_size, train_path, val_path, save_path, total_epochs, batch
     ddp_setup(rank, world_size)
     device = set_device()
 
-    train_loader = prepare_dataloader(train_path, train_transforms(), batch_size, is_train=True)
-    val_loader = prepare_dataloader(val_path, val_transforms(), batch_size, is_train=False)
+    batch_size_per_gpu = batch_size // world_size
+    train_loader = prepare_dataloader(train_path, train_transforms(), batch_size_per_gpu, is_train=True)
+    val_loader = prepare_dataloader(val_path, val_transforms(), batch_size_per_gpu, is_train=False)
 
     base_model = load_pretrained("aimv2-large-patch14-224", backend="torch")
     model = AIMClassificationModel(base_model, num_classes=1)
